@@ -2,6 +2,8 @@ package com.qa.quickstart.OrangeHMR;
 
 public class Constant {
 
+		//Constant paths and Strings used throughout the project
+		
 		protected static final String url = "http://opensource.demo.orangehrmlive.com/index.php/dashboard";
 		
 		protected static final String imagePath = "C:\\Users\\Admin\\Assessment\\OrangeHRM\\OrangeHRM\\resources\\peace.jpg"; 
