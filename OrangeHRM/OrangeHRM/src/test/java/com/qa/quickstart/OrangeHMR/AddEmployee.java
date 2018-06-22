@@ -1,8 +1,6 @@
 package com.qa.quickstart.OrangeHMR;
 
-import cucumber.api.java.en.Given;
-import cucumber.api.java.en.When;
-import cucumber.api.java.en.Then;
+import cucumber.api.java.en.*;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -20,18 +18,18 @@ import cucumber.api.java.en.And;
 public class AddEmployee {
 	
 	WebDriver driver;
-	String path = "http://www.practiceselenium.com/welcome.html";
 	static ExtentReports report;
 	
   @Given("^the Add Employee Tab$")
   public void navToAddEmployee() throws Throwable {
+	  //Set property of driver being used
 	  System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\eclipse-workspace\\chromedriver.exe");
-	  report = new ExtentReports("C:\\Users\\Admin\\Assessment\\OrangeHRM\\OrangeHRM\\reports\\testReport.html", true);
+	  report = new ExtentReports(Constant.reportPath, true);
 	  driver = new ChromeDriver();
 	  driver.manage().window().maximize();
-	  driver.navigate().to("http://opensource.demo.orangehrmlive.com/index.php/dashboard");
+	  driver.navigate().to(Constant.url);
 	  Loginpage login = PageFactory.initElements(driver, Loginpage.class);
-	  login.loginAsAdmin(driver);
+	  login.loginAsAdmin();
 	  Homepage home = PageFactory.initElements(driver, Homepage.class);
 	  home.toAddEmployeePage(driver);
 	  assertEquals("http://opensource.demo.orangehrmlive.com/index.php/pim/addEmployee", driver.getCurrentUrl());
@@ -51,27 +49,27 @@ public class AddEmployee {
   @When("^I fill out the Employee Details correctly$")
   public void fillEmpDetails() throws Throwable {
 	  AddEmployeePage addEmp = PageFactory.initElements(driver, AddEmployeePage.class);
-	  addEmp.inputDetails(driver);
-	  addEmp.uploadPhoto();
+	  addEmp.inputDetails("Kate", "Genova");
+	  addEmp.uploadPhoto(Constant.imagePath);
   }
   
   @And("^I choose to create Login Details$")
   public void createLoginDetails() throws Throwable {
 	  AddEmployeePage addEmp = PageFactory.initElements(driver, AddEmployeePage.class);
-	  addEmp.selectLoginDetails(driver);
+	  addEmp.selectLoginDetails();
 
   }
 
   @And("^I fill out the Login Details correctly$")
   public void fillLoginDetails() throws Throwable {
 	  AddEmployeePage addEmp = PageFactory.initElements(driver, AddEmployeePage.class);
-	  addEmp.inputLoginDetails(driver);
+	  addEmp.inputLoginDetails(driver, "thekate", "password", false);
   }
   
   @And("^I click the Save button$")
   public void save() throws Throwable {
 	  AddEmployeePage addEmp = PageFactory.initElements(driver, AddEmployeePage.class);
-	  addEmp.save(driver);
+	  addEmp.save();
 
   }
   

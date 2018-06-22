@@ -1,8 +1,6 @@
 package com.qa.quickstart.OrangeHMR;
 
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 public class Loginpage {
@@ -17,8 +15,9 @@ public class Loginpage {
 	private WebElement loginButton;
 	
 	
-	public void loginAsAdmin(WebDriver driver) {
-		Actions action = new Actions(driver);
-		action.click(username).sendKeys("Admin").click(password).sendKeys("admin").click(loginButton).perform();
+	public void loginAsAdmin() {
+		username.sendKeys(Constant.adminUsername);
+		password.sendKeys(Constant.adminPassword);
+		loginButton.click();
 	}
 }

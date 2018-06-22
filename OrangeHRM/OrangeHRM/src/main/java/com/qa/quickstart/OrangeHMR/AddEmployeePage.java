@@ -1,5 +1,6 @@
 package com.qa.quickstart.OrangeHMR;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -12,6 +13,9 @@ public class AddEmployeePage {
 	
 	@FindBy(id="lastName")
 	private WebElement lastNameInput;
+	
+	@FindBy(id="middleName")
+	private WebElement middleNameInput;
 	
 	@FindBy(id="chkLogin")
 	private WebElement loginDetailsCheckbox;
@@ -31,30 +35,43 @@ public class AddEmployeePage {
 	@FindBy(id="photofile")
 	private WebElement uploadPhoto;
 	
-	String path = "C:\\Users\\Admin\\Assessment\\OrangeHRM\\OrangeHRM\\resources\\peace.jpg";
+	@FindBy(id="status")
+	private WebElement enabledStatus;
 	
 	
-	public void inputDetails(WebDriver driver) {
-		Actions action = new Actions(driver);
-		action.click(firstNameInput).sendKeys("Kate").click(lastNameInput).sendKeys("Genova").perform();
+	public void inputDetails(String fname, String mname, String lname) {
+		firstNameInput.sendKeys(fname);
+		middleNameInput.sendKeys(mname);
+		lastNameInput.sendKeys(lname);
+	}
+	
+	public void inputDetails(String fname, String lname) {
+		firstNameInput.sendKeys(fname);
+		lastNameInput.sendKeys(lname);
 	}
 
-	public void selectLoginDetails(WebDriver driver) {
-		Actions action = new Actions(driver);
-		action.click(loginDetailsCheckbox).perform();
+	public void selectLoginDetails() {
+		loginDetailsCheckbox.click();
 	}
 	
-	public void inputLoginDetails(WebDriver driver) {
+	public void inputLoginDetails(WebDriver driver, String user_name, String pass_word, Boolean enabled) {
+		username.sendKeys(user_name);
+		password.sendKeys(pass_word);
+		confirmPassword.sendKeys(pass_word);
+		
 		Actions action = new Actions(driver);
-		action.click(username).sendKeys("thekate").click(password).sendKeys("password").click(confirmPassword).sendKeys("password").perform();
+		if (enabled==false) {
+			enabledStatus.click();
+			action.sendKeys(Keys.ARROW_DOWN).sendKeys(Keys.RETURN).perform();
+		}
 	}
 	
-	public void save(WebDriver driver) {
-		Actions action = new Actions(driver);
-		action.click(saveButton).perform();
+	
+	public void save() {
+		saveButton.click();
 	}
 	
-	public void uploadPhoto() {
+	public void uploadPhoto(String path) {
 		uploadPhoto.sendKeys(path);
 	}
 }
