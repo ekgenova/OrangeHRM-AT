@@ -52,6 +52,7 @@ public class AddEmployee {
   public void fillEmpDetails() throws Throwable {
 	  AddEmployeePage addEmp = PageFactory.initElements(driver, AddEmployeePage.class);
 	  addEmp.inputDetails(driver);
+	  addEmp.uploadPhoto();
   }
   
   @And("^I choose to create Login Details$")

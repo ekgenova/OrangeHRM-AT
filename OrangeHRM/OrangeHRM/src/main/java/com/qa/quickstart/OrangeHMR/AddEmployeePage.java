@@ -28,6 +28,11 @@ public class AddEmployeePage {
 	@FindBy(id="btnSave")
 	private WebElement saveButton;
 	
+	@FindBy(id="photofile")
+	private WebElement uploadPhoto;
+	
+	String path = "C:\\Users\\Admin\\Assessment\\OrangeHRM\\OrangeHRM\\resources\\peace.jpg";
+	
 	
 	public void inputDetails(WebDriver driver) {
 		Actions action = new Actions(driver);
@@ -47,5 +52,9 @@ public class AddEmployeePage {
 	public void save(WebDriver driver) {
 		Actions action = new Actions(driver);
 		action.click(saveButton).perform();
+	}
+	
+	public void uploadPhoto() {
+		uploadPhoto.sendKeys(path);
 	}
 }
